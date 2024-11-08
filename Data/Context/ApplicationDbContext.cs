@@ -1,15 +1,15 @@
-﻿using Entities;
+﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Data
+namespace Data.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
             base(options)
         {
-            
+
         }
         public DbSet<Category> categories { get; set; }
         public DbSet<User> users { get; set; }
