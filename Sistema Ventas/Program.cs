@@ -1,5 +1,6 @@
 ﻿using Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Sistema_Ventas.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Conexion base de datos
 var connectionString = builder.Configuration.GetConnectionString("ConexionSQL");
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
@@ -26,6 +27,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
