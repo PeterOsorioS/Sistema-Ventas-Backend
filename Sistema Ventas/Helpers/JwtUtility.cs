@@ -23,6 +23,16 @@ namespace Sistema_Ventas.Helpers
                 new Claim("UserId", user.Id.ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _config["Jwt:Issuer"],
+                audience: _config["Jwt:Audience"],
+                claims: claim,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_config["Jwt:Expire"])),
+                signingCredentials: credentials
+                );
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

@@ -1,6 +1,14 @@
 ﻿using Data.Context;
+using Data.Repository.Impl;
+using Data.Repository.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Service.Impl;
+using Service.Interface;
+using Sistema_Ventas.Helpers;
 using Sistema_Ventas.Middleware;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +24,25 @@ var connectionString = builder.Configuration.GetConnectionString("ConexionSQL");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    }
+    );
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddTransient<JwtUtility>();
 
 var app = builder.Build();
 
