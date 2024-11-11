@@ -1,4 +1,4 @@
-﻿using Sistema_Ventas.Exceptions;
+﻿using Exceptions;
 using System.Net;
 using System.Text.Json;
 

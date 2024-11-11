@@ -1,4 +1,4 @@
-﻿namespace Sistema_Ventas.Exceptions
+﻿namespace Exceptions
 {
     public class BadRequestException:Exception
     {

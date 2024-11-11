@@ -3,9 +3,11 @@ using Entities.Models;
 using Service.Interface;
 using Microsoft.AspNetCore.Identity;
 using Service.DTOs;
+using Exceptions;
 
 namespace Service.Impl
 {
+
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
@@ -24,8 +26,8 @@ namespace Service.Impl
         {
             var userExist = _userRepository.GetByEmail(login.Email);
 
-            if (userExist == null || 
-               _password.VerifyHashedPassword(userExist,userExist.Password,login.Password) != PasswordVerificationResult.Success)
+            if (userExist == null ||
+               _password.VerifyHashedPassword(userExist, userExist.Password, login.Password) != PasswordVerificationResult.Success)
             {
                 throw new UnauthorizedAccessException("El correo electronico o contraseña es incorrecto.");
             }
@@ -34,7 +36,15 @@ namespace Service.Impl
 
         public string Register(RegisterDTO register)
         {
-            throw new NotImplementedException();
+            var userExist = _userRepository.GetByEmail(register.Email);
+            if (userExist != null)
+            {
+                throw new BadRequestException("Ya existe un usuario con ese correo.");
+            }
+            _userRepository.Add(userExist);
+
+            var token = _token.CreateToken(userExist);
+            return token;
         }
 
     }
