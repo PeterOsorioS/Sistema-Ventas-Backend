@@ -7,12 +7,12 @@ namespace Service.Impl
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _repository;
+        private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher<User> _password;
-        public UserService(IRepository<User> repository,
+        public UserService(IUserRepository userRepository,
             IPasswordHasher<User> password)
         {
-            _repository = repository;
+            _userRepository = userRepository;
             _password = password;
         }
         public void Authentication()
