@@ -13,6 +13,7 @@ namespace Sistema_Ventas.Helpers
         {
             _config = config;
         }
+
         public string CreateToken(User user)
         {
             var claim = new[]

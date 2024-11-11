@@ -58,9 +58,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Application middleware
+
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseMiddleware<PermissionsBlockedMiddleware>();
+
+app.UseMiddleware<TokenValidationMiddleware>();
 
 app.UseAuthentication();
 
