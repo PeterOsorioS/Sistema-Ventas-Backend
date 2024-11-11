@@ -26,6 +26,6 @@ namespace Entities.Models
         [ForeignKey("IdRole")]
         public Role Role { get; set; }
         [Column("permissions_blocked")]
-        public ICollection<PermissionsBlocked> PermissionsBlocked { get; set; }
+        public ICollection<PermissionBlocked> PermissionsBlocked { get; set; }
     }
 }
