@@ -6,29 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Models
+namespace Service.DTOs
 {
-    public class Product
+    public class ProductDTO
     {
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
-        [Column("name")]
+        [Required(ErrorMessage ="El nombre es obligatorio.")]
         public string Name { get; set; }
-        [Column("description")]
         public string? Description { get; set; }
-        [Column("code_qr")]
         public string? CodeQR { get; set; }
-        [Column("price")]
+        [Required(ErrorMessage = "El precio es obligatorio.")]
         public decimal Price { get; set; }
-        [Column("stock")]
+        [Required(ErrorMessage = "El stock es obligatorio.")]
+        [Range(0, int.MaxValue, ErrorMessage = "La cantidad debe ser mayor a 0")]
         public int Stock { get; set; }
-        [Column("state")]
+        [Required(ErrorMessage = "El estado es obligatorio.")]
         public bool State { get; set; }
-        [Column("creation_date")]
-        public string CreationDate { get; set; }
-        [Column("category")]
+        [Required(ErrorMessage = "La categoria es obligatoria.")]
         public int IdCategory { get; set; }
-        public Category Category { get; set; }
     }
 }
