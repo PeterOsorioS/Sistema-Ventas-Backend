@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Service.Impl;
 using Service.Interface;
+using Service.Mapping;
 using Sistema_Ventas.Helpers;
 using Sistema_Ventas.Middleware;
 using System.Text;
@@ -20,6 +21,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 // Conexion base de datos
 var connectionString = builder.Configuration.GetConnectionString("ConexionSQL");
@@ -46,6 +48,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddTransient<IJwtUtility, JwtUtility>();
+
+// Mappeo
+MappingConfig.RegisterMappings();
 
 var app = builder.Build();
 
