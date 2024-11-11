@@ -17,6 +17,12 @@ namespace Data.Repository.Impl
             _db = db;
         }
 
+        public User GetByEmail(string email)
+        {
+            var userDb = _db.users.FirstOrDefault(u => u.Email == email);
+            return userDb;
+        }
+
         public async Task UpdateInfo(User user)
         {
             var userDb = _db.users.FirstOrDefault(u => u.Id == user.Id);

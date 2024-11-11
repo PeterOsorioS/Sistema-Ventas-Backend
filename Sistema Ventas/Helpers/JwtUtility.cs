@@ -1,12 +1,13 @@
 ﻿using Entities.Models;
 using Microsoft.IdentityModel.Tokens;
+using Service.Interface;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace Sistema_Ventas.Helpers
 {
-    public class JwtUtility
+    public class JwtUtility : IJwtUtility
     {
         private readonly IConfiguration _config;
         public JwtUtility(IConfiguration config)

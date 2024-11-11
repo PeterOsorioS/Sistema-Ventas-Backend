@@ -5,20 +5,19 @@ namespace Sistema_Ventas.Middleware
     public class PermissionsBlockedMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ApplicationDbContext _db;
-        public PermissionsBlockedMiddleware(RequestDelegate next, ApplicationDbContext db)
+        public PermissionsBlockedMiddleware(RequestDelegate next)
         {
             _next = next;
-            _db = db;
         }
 
         public async Task Invoke(HttpContext context)
         {
+            var db = context.RequestServices.GetRequiredService<ApplicationDbContext>();
             var userIdClaim = context.User?.Claims.FirstOrDefault(u => u.Type == "UserId")?.Value;
             if (int.TryParse(userIdClaim, out var UserId))
             {
                 var requestPermission = context.Request.Path.Value;
-                var permissionBlocked = _db.permissions_blocked.Any(
+                var permissionBlocked = db.permissions_blocked.Any(
                     p => p.UserId == UserId && p.Permission == requestPermission);
 
                 if (permissionBlocked)
