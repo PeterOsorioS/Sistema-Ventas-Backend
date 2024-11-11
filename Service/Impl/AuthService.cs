@@ -4,6 +4,7 @@ using Service.Interface;
 using Microsoft.AspNetCore.Identity;
 using Service.DTOs;
 using Exceptions;
+using Mapster;
 
 namespace Service.Impl
 {
@@ -36,16 +37,22 @@ namespace Service.Impl
 
         public string Register(RegisterDTO register)
         {
+            // Validation of information
             var userExist = _userRepository.GetByEmail(register.Email);
             if (userExist != null)
             {
                 throw new BadRequestException("Ya existe un usuario con ese correo.");
             }
 
-            _userRepository.Add(userExist);
+            // User mapping
+            var newUser = register.Adapt<User>();
+
+            // User creation
+            _userRepository.Add(newUser);
             _userRepository.Save();
 
-            var token = _token.CreateToken(userExist);
+            // Token creation
+            var token = _token.CreateToken(newUser);
             return token;
         }
 
