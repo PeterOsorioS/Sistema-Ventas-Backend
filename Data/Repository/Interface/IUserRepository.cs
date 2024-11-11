@@ -10,5 +10,6 @@ namespace Data.Repository.Interface
     public interface IUserRepository : IRepository<User>
     {
         public Task UpdatePassword(User user);
+        public Task UpdateInfo(User user);
     }
 }
