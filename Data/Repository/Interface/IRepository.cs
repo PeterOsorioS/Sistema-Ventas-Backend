@@ -21,5 +21,7 @@ namespace Data.Repository.Interface
             string? includeProperties = null);
 
         public void Remove(T Entity);
+        public void Save();
+        public Task SaveAsync();
     }
 }

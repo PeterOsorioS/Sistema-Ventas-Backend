@@ -90,5 +90,15 @@ namespace Data.Repository.Impl
         {
             _context.Remove(Entity);
         }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
