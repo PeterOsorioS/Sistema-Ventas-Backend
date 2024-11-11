@@ -60,6 +60,8 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
+app.UseMiddleware<PermissionsBlockedMiddleware>();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
