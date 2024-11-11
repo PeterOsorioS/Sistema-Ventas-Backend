@@ -21,7 +21,7 @@ namespace Sistema_Ventas.Helpers
             {
                 new Claim(JwtRegisteredClaimNames.Name, $"{user.FirstName + user.LastName}"),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("Role", user.Role.Name),
+                new Claim("Role", user.IdRole.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("UserId", user.Id.ToString())
             };

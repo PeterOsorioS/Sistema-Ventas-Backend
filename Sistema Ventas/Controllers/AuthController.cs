@@ -41,6 +41,10 @@ namespace Sistema_Ventas.Controllers
                 var response = _authService.Register(register);
                 return Ok(response);
             }
+            catch (BadRequestException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 return new StatusCodeResult(500);
