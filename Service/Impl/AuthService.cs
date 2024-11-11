@@ -41,7 +41,9 @@ namespace Service.Impl
             {
                 throw new BadRequestException("Ya existe un usuario con ese correo.");
             }
+
             _userRepository.Add(userExist);
+            _userRepository.Save();
 
             var token = _token.CreateToken(userExist);
             return token;
