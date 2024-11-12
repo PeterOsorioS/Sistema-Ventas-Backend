@@ -16,7 +16,7 @@ namespace Service.Impl
             _productRepository = productRepository;
         }
 
-        public ProductDTO CreateProduct(ProductDTO productDTO)
+        public CreateProductDTO CreateProduct(CreateProductDTO productDTO)
         {
             var product = productDTO.Adapt<Product>();
             product.CreationDate = DateTime.UtcNow.ToString("yyyy-MM-dd");

@@ -9,7 +9,7 @@ namespace Service.Interface
 {
     public interface IProductService
     {
-        public ProductDTO CreateProduct(ProductDTO productDTO);
+        public CreateProductDTO CreateProduct(CreateProductDTO productDTO);
         public ProductDTO GetProduct(int id);
         public IEnumerable<ProductDTO> GetAllProducts();
         public UpdateProductDTO EditProduct(int id, UpdateProductDTO productDTO);
