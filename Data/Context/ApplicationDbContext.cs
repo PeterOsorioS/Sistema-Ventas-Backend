@@ -16,5 +16,18 @@ namespace Data.Context
         public DbSet<Role> roles { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<PermissionBlocked> permissions_blocked { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Product>()
+                .Property(u => u.State)
+                .HasDefaultValue(true);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

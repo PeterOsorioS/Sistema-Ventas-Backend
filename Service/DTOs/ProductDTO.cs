@@ -10,6 +10,8 @@ namespace Service.DTOs
 {
     public class ProductDTO
     {
+        [Required(ErrorMessage = "El Id es obligatorio.")]
+        public int Id { get; set; }
         [Required(ErrorMessage ="El nombre es obligatorio.")]
         public string Name { get; set; }
         public string? Description { get; set; }
