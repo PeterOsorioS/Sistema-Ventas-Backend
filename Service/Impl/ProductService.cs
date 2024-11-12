@@ -29,10 +29,10 @@ namespace Service.Impl
         public ProductDTO GetProduct(int id)
         {
             var productDB = _productRepository.GetById(id);
-            if (productDB == null)
-            {
-                throw new BadRequestException("El producto no existe.");
-            }
+                if (productDB == null)
+                {
+                    throw new BadRequestException("El producto no existe.");
+                }
             var product = productDB.Adapt<ProductDTO>();
             return product;
         }
@@ -40,7 +40,7 @@ namespace Service.Impl
         public IEnumerable<ProductDTO> GetProducts()
         {
             var productsDB = _productRepository.GetAll(includeProperties: "Category");
-            if (productsDB == null)
+            if (!productsDB.Any())
             {
                 throw new BadRequestException("No se encuentran productos registrados.");
             }

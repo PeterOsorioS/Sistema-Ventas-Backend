@@ -27,10 +27,9 @@ namespace Sistema_Ventas.Controllers
             {
                 throw;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(500, ex);
             }
         }
     }
