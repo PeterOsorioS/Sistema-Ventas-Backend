@@ -29,6 +29,7 @@ namespace Entities.Models
         public string CreationDate { get; set; }
         [Column("category")]
         public int IdCategory { get; set; }
+        [ForeignKey("IdCategory")]
         public Category Category { get; set; }
     }
 }
