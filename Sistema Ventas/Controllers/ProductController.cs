@@ -24,7 +24,7 @@ namespace Sistema_Ventas.Controllers
                 var response = _productService.GetAllProducts();
                 return Ok(response);
             }
-            catch (BadRequestException)
+            catch (NotFoundException)
             {
                 throw;
             }
@@ -56,7 +56,7 @@ namespace Sistema_Ventas.Controllers
                 var response = _productService.GetProduct(id);
                 return Ok(response);
             }
-            catch (BadRequestException)
+            catch (NotFoundException)
             {
                 throw;
             }
@@ -74,7 +74,7 @@ namespace Sistema_Ventas.Controllers
                 var response = _productService.EditProduct(id,productDTO);
                 return Ok(response);
             }
-            catch (BadRequestException)
+            catch (NotFoundException)
             {
                 throw;
             }
@@ -91,7 +91,7 @@ namespace Sistema_Ventas.Controllers
                 await _productService.DeleteProduct(id);
                 return Ok("Producto eliminado.");
             }
-            catch (BadRequestException)
+            catch (NotFoundException)
             {
                 throw;
             }

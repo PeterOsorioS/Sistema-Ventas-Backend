@@ -31,7 +31,7 @@ namespace Service.Impl
             var productDB = _productRepository.GetById(id);
             if (productDB == null)
             {
-                throw new BadRequestException("El producto no existe.");
+                throw new NotFoundException("El producto no existe.");
             }
             await _productRepository.Remove(productDB);
             await _productRepository.SaveAsync();
@@ -42,7 +42,7 @@ namespace Service.Impl
             var productDB = _productRepository.GetById(id);
             if (productDB == null)
             {
-                throw new BadRequestException("El producto no existe.");
+                throw new NotFoundException("El producto no existe.");
             }
             var product = productDB.Adapt<ProductDTO>();
             return product;
@@ -53,7 +53,7 @@ namespace Service.Impl
             var productsDB = _productRepository.GetAll(includeProperties: "Category");
             if (!productsDB.Any())
             {
-                throw new BadRequestException("No se encuentran productos registrados.");
+                throw new NotFoundException("No se encuentran productos registrados.");
             }
             var products = productsDB.Adapt<IEnumerable<ProductDTO>>();
             return products;
@@ -64,7 +64,7 @@ namespace Service.Impl
             var producte = _productRepository.GetById(id);
             if (producte == null)
             {
-                throw new BadRequestException("El producto no existe.");
+                throw new NotFoundException("El producto no existe.");
             }
             var product = productDTO.Adapt<Product>();
             product.Id = id;
