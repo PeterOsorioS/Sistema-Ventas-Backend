@@ -70,8 +70,12 @@ namespace Sistema_Ventas.Controllers
         {
             try
             {
-                var response = _productService.UpdateProduct(productDTO);
+                var response = _productService.EditProduct(id,productDTO);
                 return Ok(response);
+            }
+            catch (BadRequestException)
+            {
+                throw;
             }
             catch (Exception ex)
             {

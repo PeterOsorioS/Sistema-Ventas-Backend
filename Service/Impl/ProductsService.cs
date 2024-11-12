@@ -58,7 +58,7 @@ namespace Service.Impl
             return products;
         }
 
-        public void UpdateProduct(int id, ProductDTO productDTO)
+        public ProductDTO EditProduct(int id, ProductDTO productDTO)
         {
             var producte = _productRepository.GetById(id);
             if (producte == null)
@@ -70,6 +70,8 @@ namespace Service.Impl
 
             _productRepository.Update(product);
             _productRepository.Save();
+
+            return productDTO;
         }
     }
 }
