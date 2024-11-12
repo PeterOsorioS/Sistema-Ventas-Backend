@@ -13,9 +13,9 @@ namespace Data.Context
         }
         public DbSet<Category> categories { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<Role> roles { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<PermissionBlocked> permissions_blocked { get; set; }
+        public DbSet<Role> roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,10 @@ namespace Data.Context
             modelBuilder.Entity<Product>()
                 .Property(u => u.State)
                 .HasDefaultValue(true);
+
+            modelBuilder.Entity<Category>()
+                .HasIndex(c => c.Name)
+                .IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }
