@@ -14,12 +14,7 @@ namespace Service.Mapping
         public static void RegisterMappings()
         {
             TypeAdapterConfig<RegisterDTO, User>.NewConfig()
-                .Map(dest => dest.FirstName, src => src.FirstName)
-                .Map(dest => dest.LastName, src => src.LastName)
-                .Map(dest => dest.Email, src => src.Email)
-                .Map(dest => dest.Password, src => src.Password)
-                .Map(dest => dest.DNI, src => src.DNI)
-                .Map(dest => dest.IdRole, src => src.IdRole)
+                .Ignore(dest => dest.Id)
                 .Map(dest => dest.Birthday, src => src.Birthdate.ToString());
 
             TypeAdapterConfig<Product, ProductDTO>.NewConfig()
