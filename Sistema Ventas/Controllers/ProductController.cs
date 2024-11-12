@@ -1,11 +1,12 @@
 ﻿using Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service.DTOs;
 using Service.Interface;
 
 namespace Sistema_Ventas.Controllers
 {
-    [Route("api/product")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -13,6 +14,24 @@ namespace Sistema_Ventas.Controllers
         public ProductController(IProductService productService)
         {
             _productService = productService;
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var response = _productService.GetProducts();
+                return Ok(response);
+            }
+            catch (BadRequestException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpGet("{id:int}")]
@@ -26,6 +45,19 @@ namespace Sistema_Ventas.Controllers
             catch (BadRequestException)
             {
                 throw;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+        [HttpPost]
+        public IActionResult CreateProduct(ProductDTO product)
+        {
+            try
+            {
+                var response = _productService.Create(product);
+                return Ok(response);
             }
             catch (Exception ex)
             {
