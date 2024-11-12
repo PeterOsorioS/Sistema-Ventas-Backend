@@ -12,7 +12,7 @@ namespace Service.Interface
         public ProductDTO CreateProduct(ProductDTO productDTO);
         public ProductDTO GetProduct(int id);
         public IEnumerable<ProductDTO> GetAllProducts();
-        public ProductDTO EditProduct(int id,ProductDTO product);
+        public UpdateProductDTO EditProduct(int id, UpdateProductDTO productDTO);
         public Task DeleteProduct(int id);
     }
 }

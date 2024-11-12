@@ -67,11 +67,11 @@ namespace Sistema_Ventas.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Update(int id, [FromBody] ProductDTO productDTO)
+        public IActionResult Update(int id, [FromBody] UpdateProductDTO productDTO)
         {
             try
             {
-                var response = _productService.EditProduct(id,productDTO);
+                var response = _productService.EditProduct(id, productDTO);
                 return Ok(response);
             }
             catch (NotFoundException)

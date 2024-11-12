@@ -59,7 +59,7 @@ namespace Service.Impl
             return products;
         }
 
-        public ProductDTO EditProduct(int id, ProductDTO productDTO)
+        public UpdateProductDTO EditProduct(int id, UpdateProductDTO productDTO)
         {
             var producte = _productRepository.GetById(id);
             if (producte == null)
