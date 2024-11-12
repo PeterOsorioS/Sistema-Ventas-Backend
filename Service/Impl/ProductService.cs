@@ -17,7 +17,13 @@ namespace Service.Impl
         }
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var productDB = _productRepository.GetById(id);
+            if (productDB == null)
+            {
+                throw new BadRequestException("El producto no existe.");
+            }
+            _productRepository.Remove(productDB);
+            _productRepository.Save();
         }
 
         public ProductDTO GetProduct(int id)
