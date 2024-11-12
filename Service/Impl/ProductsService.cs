@@ -8,13 +8,21 @@ using Service.Interface;
 
 namespace Service.Impl
 {
-    public class ProductService : IProductService
+    public class ProductsService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        public ProductsService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
+
+        public void CreateProduct(ProductDTO productDTO)
+        {
+            var product = productDTO.Adapt<Product>();
+            _productRepository.Add(product);
+            _productRepository.Save();
+        }
+
         public void DeleteProduct(int id)
         {
             var productDB = _productRepository.GetById(id);
@@ -29,10 +37,10 @@ namespace Service.Impl
         public ProductDTO GetProduct(int id)
         {
             var productDB = _productRepository.GetById(id);
-                if (productDB == null)
-                {
-                    throw new BadRequestException("El producto no existe.");
-                }
+            if (productDB == null)
+            {
+                throw new BadRequestException("El producto no existe.");
+            }
             var product = productDB.Adapt<ProductDTO>();
             return product;
         }
@@ -51,7 +59,7 @@ namespace Service.Impl
         public void UpdateProduct(int id, ProductDTO productDTO)
         {
             var producte = _productRepository.GetById(id);
-            if (producte == null) 
+            if (producte == null)
             {
                 throw new BadRequestException("El producto no existe.");
             }
