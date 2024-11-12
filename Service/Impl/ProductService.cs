@@ -44,6 +44,11 @@ namespace Service.Impl
 
         public void UpdateProduct(int id, ProductDTO productDTO)
         {
+            var producte = _productRepository.GetById(id);
+            if (producte == null) 
+            {
+                throw new BadRequestException("El producto no existe.");
+            }
             var product = productDTO.Adapt<Product>();
             product.Id = id;
 
