@@ -26,12 +26,8 @@ namespace Service.Mapping
                 .PreserveReference(true);
 
             TypeAdapterConfig<CreateProductDTO, Product>.NewConfig()
-                .Map(dest => dest.Name, src => src.Name)
-                .Map(dest => dest.Description, src => src.Description)
-                .Map(dest => dest.CodeQR, src => src.CodeQR)
-                .Map(dest => dest.Price, src => src.Price)
-                .Map(dest => dest.State, src => src.State)
-                .Map(dest => dest.Stock, src => src.Stock);
+                .Ignore(dest => dest.Id)
+                .Ignore(dest => dest.CreationDate);
 
             TypeAdapterConfig<IEnumerable<Product>, IEnumerable<ProductDTO>>
                 .NewConfig()
