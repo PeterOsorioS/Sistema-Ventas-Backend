@@ -15,19 +15,6 @@ namespace Sistema_Ventas.Controllers
         {
             _productService = productService;
         }
-        [HttpPost]
-        public IActionResult Create(ProductDTO product)
-        {
-            try
-            {
-                var response = _productService.CreateProduct(product);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
-        }
 
         [HttpGet]
         public IActionResult GetAll()
@@ -40,6 +27,20 @@ namespace Sistema_Ventas.Controllers
             catch (BadRequestException)
             {
                 throw;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductDTO product)
+        {
+            try
+            {
+                var response = _productService.CreateProduct(product);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -72,6 +73,23 @@ namespace Sistema_Ventas.Controllers
             {
                 var response = _productService.EditProduct(id,productDTO);
                 return Ok(response);
+            }
+            catch (BadRequestException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id) 
+        {
+            try
+            {
+                await _productService.DeleteProduct(id);
+                return Ok("Producto eliminado.");
             }
             catch (BadRequestException)
             {
