@@ -35,7 +35,7 @@ namespace Sistema_Ventas.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductDTO product)
+        public IActionResult Create(CreateProductDTO product)
         {
             try
             {
