@@ -11,6 +11,6 @@ namespace Service.DTOs
     {
         [Required(ErrorMessage = "El nombre de la categoria es obligatorio.")]
         public string Name { get; set; }
-        public bool State {  get; set; }
+        public bool State { get; set; }
     }
 }
