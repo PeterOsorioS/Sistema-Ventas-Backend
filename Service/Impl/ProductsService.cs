@@ -19,7 +19,7 @@ namespace Service.Impl
         public ProductDTO CreateProduct(ProductDTO productDTO)
         {
             var product = productDTO.Adapt<Product>();
-            product.CreationDate = DateTime.UtcNow.ToString();
+            product.CreationDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
             _productRepository.Add(product);
             _productRepository.Save();
 
