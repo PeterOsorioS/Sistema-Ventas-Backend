@@ -16,11 +16,13 @@ namespace Service.Impl
             _productRepository = productRepository;
         }
 
-        public void CreateProduct(ProductDTO productDTO)
+        public ProductDTO CreateProduct(ProductDTO productDTO)
         {
             var product = productDTO.Adapt<Product>();
             _productRepository.Add(product);
             _productRepository.Save();
+
+            return productDTO;
         }
 
         public void DeleteProduct(int id)
@@ -45,7 +47,7 @@ namespace Service.Impl
             return product;
         }
 
-        public IEnumerable<ProductDTO> GetProducts()
+        public IEnumerable<ProductDTO> GetAllProducts()
         {
             var productsDB = _productRepository.GetAll(includeProperties: "Category");
             if (!productsDB.Any())

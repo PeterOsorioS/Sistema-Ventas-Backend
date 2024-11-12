@@ -15,13 +15,26 @@ namespace Sistema_Ventas.Controllers
         {
             _productService = productService;
         }
+        [HttpPost]
+        public IActionResult Create(ProductDTO product)
+        {
+            try
+            {
+                var response = _productService.CreateProduct(product);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
         [HttpGet]
         public IActionResult GetAll()
         {
             try
             {
-                var response = _productService.GetProducts();
+                var response = _productService.GetAllProducts();
                 return Ok(response);
             }
             catch (BadRequestException)
@@ -51,12 +64,13 @@ namespace Sistema_Ventas.Controllers
                 return StatusCode(500, ex);
             }
         }
-        [HttpPost]
-        public IActionResult CreateProduct(ProductDTO product)
+
+        [HttpPut("{id:int}")]
+        public IActionResult Update(int id, [FromBody] ProductDTO productDTO)
         {
             try
             {
-                var response = _productService.Create(product);
+                var response = _productService.UpdateProduct(productDTO);
                 return Ok(response);
             }
             catch (Exception ex)

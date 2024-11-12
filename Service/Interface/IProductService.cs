@@ -9,9 +9,9 @@ namespace Service.Interface
 {
     public interface IProductService
     {
-        public void CreateProduct(ProductDTO productDTO);
+        public ProductDTO CreateProduct(ProductDTO productDTO);
         public ProductDTO GetProduct(int id);
-        public IEnumerable<ProductDTO> GetProducts();
+        public IEnumerable<ProductDTO> GetAllProducts();
         public void UpdateProduct(int id,ProductDTO product);
         public void DeleteProduct(int id);
     }
