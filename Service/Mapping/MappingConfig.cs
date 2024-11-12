@@ -31,8 +31,7 @@ namespace Service.Mapping
                 .Map(dest => dest.CodeQR, src => src.CodeQR)
                 .Map(dest => dest.Price, src => src.Price)
                 .Map(dest => dest.State, src => src.State)
-                .Map(dest => dest.Stock, src => src.Stock)
-                .Map(dest => dest.CreationDate, src => src.CreationDate.ToString());
+                .Map(dest => dest.Stock, src => src.Stock);
 
             TypeAdapterConfig<IEnumerable<Product>, IEnumerable<ProductDTO>>
                 .NewConfig()
