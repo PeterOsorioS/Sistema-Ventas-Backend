@@ -20,7 +20,7 @@ namespace Data.Repository.Interface
         public IEnumerable<T> GetFirstOrDefault(Expression<Func<T, bool>>? filter = null,
             string? includeProperties = null);
 
-        public void Remove(T Entity);
+        public Task Remove(T Entity);
         public void Save();
         public Task SaveAsync();
     }

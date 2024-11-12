@@ -25,15 +25,15 @@ namespace Service.Impl
             return productDTO;
         }
 
-        public void DeleteProduct(int id)
+        public async Task DeleteProduct(int id)
         {
             var productDB = _productRepository.GetById(id);
             if (productDB == null)
             {
                 throw new BadRequestException("El producto no existe.");
             }
-            _productRepository.Remove(productDB);
-            _productRepository.Save();
+            await _productRepository.Remove(productDB);
+            await _productRepository.SaveAsync();
         }
 
         public ProductDTO GetProduct(int id)

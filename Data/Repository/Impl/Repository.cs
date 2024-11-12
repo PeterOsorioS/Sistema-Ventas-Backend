@@ -86,7 +86,7 @@ namespace Data.Repository.Impl
 
             return query.AsNoTracking().ToList();
         }
-        public void Remove(T Entity)
+        public async Task Remove(T Entity)
         {
             _context.Remove(Entity);
         }
