@@ -23,24 +23,25 @@ namespace Service.Mapping
                 .Map(dest => dest.Birthday, src => src.Birthdate.ToString());
 
             TypeAdapterConfig<Product, ProductDTO>.NewConfig()
-                .Map(dest => dest.Name, src => src.Name)
-                .Map(dest => dest.Description, src => src.Description)
-                .Map(dest => dest.CodeQR, src => src.CodeQR)
-                .Map(dest => dest.Price, src => src.Price)
-                .Map(dest => dest.State, src => src.State)
-                .Map(dest => dest.Stock, src => src.Stock);
+                .PreserveReference(true);
 
-            TypeAdapterConfig<ProductDTO, Product>.NewConfig()
+            TypeAdapterConfig<CreateProductDTO, Product>.NewConfig()
                 .Map(dest => dest.Name, src => src.Name)
                 .Map(dest => dest.Description, src => src.Description)
                 .Map(dest => dest.CodeQR, src => src.CodeQR)
                 .Map(dest => dest.Price, src => src.Price)
                 .Map(dest => dest.State, src => src.State)
-                .Map(dest => dest.Stock, src => src.Stock);
+                .Map(dest => dest.Stock, src => src.Stock)
+                .Map(dest => dest.CreationDate, src => src.CreationDate.ToString());
 
             TypeAdapterConfig<IEnumerable<Product>, IEnumerable<ProductDTO>>
                 .NewConfig()
                 .MapWith(src => src.Select(item => item.Adapt<ProductDTO>()));
+
+            TypeAdapterConfig<UpdateProductDTO, Product>.NewConfig()
+                .Ignore(dest => dest.Id)
+                .Ignore(dest => dest.CreationDate);
+
         }
     }
 }
